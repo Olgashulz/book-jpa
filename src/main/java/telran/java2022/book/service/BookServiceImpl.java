@@ -53,16 +53,17 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDto removeBook(String isbn) {
-		Book book = bookRepository.findById(isbn).orElseThrow(EntityNotFoundException::new);
-		// bookRepository.delete(book);
-		return modelMapper.map(book, BookDto.class);
-
+		Book book = bookRepository.findById(isbn).orElseThrow(EntityNotFoundException::new);		
+		BookDto bookDto = modelMapper.map(book, BookDto.class);
+		bookRepository.delete(book);
+		return bookDto;
+		
 	}
 
 	@Override
 	public BookDto updateBook(String isbn, String title) {
-		Book book = bookRepository.findById(isbn).orElseThrow(EntityNotFoundException::new);
-		// book.setTitle(title);
+		Book book = bookRepository.findById(isbn).orElseThrow(EntityNotFoundException::new);		
+		book.setTitle(title);
 		return modelMapper.map(book, BookDto.class);
 	}
 
@@ -97,7 +98,9 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public AuthorDto removeAuthor(String authorName) {
-		return null;
+		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFoundException::new);
+		authorRepository.delete(author);
+		return modelMapper.map(author, AuthorDto.class);
 	}
 
 }

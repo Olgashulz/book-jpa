@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = "publisherName")
 @Entity
+@ToString
 public class Publisher implements Serializable{
 
 	private static final long serialVersionUID = 5083976659882404642L;
